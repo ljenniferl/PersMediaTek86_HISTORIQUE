@@ -58,6 +58,23 @@ namespace PersMediaTek86.Dal
             return lesServices;
         }
 
+        /// <summary>
+        /// Ajoute un personnel
+        /// </summary>
+        /// <param name="personnel"></param>
+        public static void AddPersonnel(Personnel personnel)
+        {
+            string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice)";
+            req += " VALUES(@nom, @prenom, @tel, @mail, @idservice);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@nom", personnel.Nom);
+            parameters.Add("@prenom", personnel.Prenom);
+            parameters.Add("@tel", personnel.Tel);
+            parameters.Add("@mail", personnel.Mail);
+            parameters.Add("@idservice", personnel.Idservice);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
 
 
     }

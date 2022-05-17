@@ -86,5 +86,9 @@ namespace PersMediaTek86
             }
         }
 
+        private void btnAjoutPersonnel_Click(object sender, EventArgs e)
+        {
+            grbLePersonnel.Enabled = true;
+        }
     }
 }
