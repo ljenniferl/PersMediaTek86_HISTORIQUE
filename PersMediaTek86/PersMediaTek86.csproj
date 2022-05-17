@@ -48,6 +48,11 @@
   <ItemGroup>
     <Compile Include="Connexion\ConnexionBDD.cs" />
     <Compile Include="Dal\AccesDonnees.cs" />
+    <Compile Include="Modele\Absence.cs" />
+    <Compile Include="Modele\Personnel.cs" />
+    <Compile Include="Modele\Responsable.cs" />
+    <Compile Include="Modele\Motif.cs" />
+    <Compile Include="Modele\Service.cs" />
     <Compile Include="Vue\FrmAuthentification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controleur\" />
-    <Folder Include="Modele\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
