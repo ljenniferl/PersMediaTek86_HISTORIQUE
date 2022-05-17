@@ -96,7 +96,7 @@ namespace PersMediaTek86.Dal
         public static void UpdatePersonnel(Personnel personnel)
         {
             string req = "UPDATE personnel SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice";
-            req += " WHERE idpersonnel = 12;";
+            req += " WHERE idpersonnel = @idpersonnel;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", personnel.Idpersonnel);
             parameters.Add("@nom", personnel.Nom);
