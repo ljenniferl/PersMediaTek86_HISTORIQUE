@@ -41,9 +41,18 @@ namespace PersMediaTek86.Controleur
         }
 
         /// <summary>
+        /// Demande de suppression d'un personnel
+        /// </summary>
+        /// <param name="personnel">Objet personnel à supprimer</param>
+        public void DelPersonnel(Personnel personnel)
+        {
+            AccesDonnees.DelPersonnel(personnel);
+        }
+
+        /// <summary>
         /// Demande d'ajout d'un personnel
         /// </summary>
-        /// <param name="personnel"></param>
+        /// <param name="personnel">Objet personnel à ajouter</param>
         public void AddPersonnel(Personnel personnel)
         {
             AccesDonnees.AddPersonnel(personnel);
@@ -52,7 +61,7 @@ namespace PersMediaTek86.Controleur
         /// <summary>
         /// Demande de modification d'un personnel
         /// </summary>
-        /// <param name="personnel"></param>
+        /// <param name="personnel">Objet personnel à modifier</param>
         public void UpdatePersonnel(Personnel personnel)
         {
             AccesDonnees.UpdatePersonnel(personnel);

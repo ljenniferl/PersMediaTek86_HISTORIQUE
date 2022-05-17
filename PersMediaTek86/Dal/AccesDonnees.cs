@@ -59,9 +59,22 @@ namespace PersMediaTek86.Dal
         }
 
         /// <summary>
+        /// Supprime un personnel
+        /// </summary>
+        /// <param name="personnel">Objet personnel à supprimer</param>
+        public static void DelPersonnel(Personnel personnel)
+        {
+            string req = "DELETE FROM personnel WHERE idpersonnel = @idpersonnel;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnel.Idpersonnel);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
         /// Ajoute un personnel
         /// </summary>
-        /// <param name="personnel"></param>
+        /// <param name="personnel">Objet personnel à ajouter</param>
         public static void AddPersonnel(Personnel personnel)
         {
             string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice)";
@@ -79,7 +92,7 @@ namespace PersMediaTek86.Dal
         /// <summary>
         /// Modifie un personnel
         /// </summary>
-        /// <param name="personnel"></param>
+        /// <param name="personnel">Objet personnel à modifier</param>
         public static void UpdatePersonnel(Personnel personnel)
         {
             string req = "UPDATE personnel SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice";
