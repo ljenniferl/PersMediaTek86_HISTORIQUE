@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace PersMediaTek86
 {
+    /// <summary>
+    /// Interface Gestion
+    /// </summary>
     public partial class FrmGestion : Form
     {
         public FrmGestion()

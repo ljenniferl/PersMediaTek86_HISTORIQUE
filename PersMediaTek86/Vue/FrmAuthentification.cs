@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace PersMediaTek86.Vue
 {
+    /// <summary>
+    /// Interface Authentification
+    /// </summary>
     public partial class FrmAuthentification : Form
     {
         public FrmAuthentification()
