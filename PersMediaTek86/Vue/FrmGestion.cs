@@ -19,6 +19,10 @@ namespace PersMediaTek86
     public partial class FrmGestion : Form
     {
         /// <summary>
+        /// Paramètre monId récupérant l'idpersonnel du personnel sélectionné dans dgvPersonnels
+        /// </summary>
+        public static int monId;
+        /// <summary>
         /// Instance du controleur
         /// </summary>
         private Controle controle;
@@ -34,6 +38,15 @@ namespace PersMediaTek86
         /// Objet pour gérer la liste des services
         /// </summary>
         BindingSource bdgServices = new BindingSource();
+        /// <summary>
+        /// Objet pour gérer la liste des absences
+        /// </summary>
+        BindingSource bdgAbsences = new BindingSource();
+        /// <summary>
+        /// Objet pour gérer la liste des motifs d'absence
+        /// </summary>
+        BindingSource bdgMotifs = new BindingSource();
+
 
         /// <summary>
         /// Initialisation des composants graphiques
@@ -106,6 +119,7 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
             }
+            grbLePersonnel.Enabled = false;
         }
 
         /// <summary>
@@ -116,6 +130,8 @@ namespace PersMediaTek86
         private void btnAjoutPersonnel_Click(object sender, EventArgs e)
         {
             grbLePersonnel.Enabled = true;
+            grbLesAbsences.Enabled = false;
+            grbLAbsence.Enabled = false;
         }
 
         /// <summary>
@@ -142,7 +158,6 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
             }
-
         }
 
         /// <summary>
@@ -208,5 +223,59 @@ namespace PersMediaTek86
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
             }
         }
+
+        // PARTIE ABSENCE
+
+        /// <summary>
+        /// Affiche la liste des absences du personnel séléectionné dans dgvLesPersonnels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAffichAbsences_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnels.SelectedRows.Count > 0)
+            {
+                monId = (int)dgvPersonnels.CurrentRow.Cells["idpersonnel"].Value;
+                RemplirListeAbsences(monId);
+                RemplirListeMotifs();
+                grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = true;
+                grbLAbsence.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Affiche les absences dans dgvAbsences
+        /// </summary>
+        public void RemplirListeAbsences(int monId)
+        {
+            List<Absence> lesAbsences = controle.GetLesAbsences(monId);
+            bdgAbsences.DataSource = lesAbsences;
+            dgvAbsences.DataSource = bdgAbsences;
+            dgvAbsences.Columns["idpersonnel"].Visible = false;
+            dgvAbsences.Columns["idmotif"].Visible = false;
+            dgvAbsences.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Affiche les motifs dans cboMotif
+        /// </summary>
+        public void RemplirListeMotifs()
+        {
+            List<Motif> lesMotifs = controle.GetLesMotifs();
+            bdgMotifs.DataSource = lesMotifs;
+            cboMotif.DataSource = bdgMotifs;
+            if (cboMotif.Items.Count > 0)
+            {
+                cboMotif.SelectedIndex = -1;
+            }
+        }
+
+
+
     }
 }
