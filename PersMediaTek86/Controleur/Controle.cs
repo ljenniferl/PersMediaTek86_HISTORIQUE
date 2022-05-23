@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using PersMediaTek86.Dal;
 using PersMediaTek86.Modele;
-using PersMediaTek86.Vue;
 
 namespace PersMediaTek86.Controleur
 {
@@ -22,10 +21,12 @@ namespace PersMediaTek86.Controleur
             (new FrmGestion(this)).ShowDialog();
         }
 
+        // PARTIE PERSONNEL
+
         /// <summary>
         /// Récupère et retourne les infos des personnels provenant de la BDD
         /// </summary>
-        /// <returns>liste des personnels</returns>
+        /// <returns>Liste des personnels</returns>
         public List<Personnel> GetLesPersonnels()
         {
             return AccesDonnees.GetLesPersonnels();
@@ -66,6 +67,54 @@ namespace PersMediaTek86.Controleur
         {
             AccesDonnees.UpdatePersonnel(personnel);
         }
+
+        // PARTIE ABSENCE
+        
+        /// <summary>
+        /// Récupère et retourne les infos des absences provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des absences</returns>
+        public List<Absence> GetLesAbsences(int monId)
+        {
+            return AccesDonnees.GetLesAbsences(monId);
+        }
+
+        /// <summary>
+        /// Récupère et retourne les infos des motifs provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des motifs</returns>
+        public List<Motif> GetLesMotifs()
+        {
+            return AccesDonnees.GetLesMotifs();
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à supprimer</param>
+        public void DelAbsence(Absence absence)
+        {
+            AccesDonnees.DelAbsence(absence);
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à ajouter</param>
+        public void AddAbsence(Absence absence)
+        {
+            AccesDonnees.AddAbsence(absence);
+        }
+
+        /// <summary>
+        /// Demande de modification d'une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à modifier</param>
+        public void UpdateAbsence(Absence absence)
+        {
+            AccesDonnees.UpdateAbsence(absence);
+        }
+
 
     }
 }

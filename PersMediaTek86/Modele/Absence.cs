@@ -13,9 +13,9 @@ namespace PersMediaTek86.Modele
     {
         private int idpersonnel;
         private DateTime dateDebut;
+        private DateTime dateFin;
         private int idmotif;
         private string libelle;
-        private DateTime dateFin;
 
         /// <summary>
         /// Constructeur : valorise les propriétés
@@ -25,7 +25,7 @@ namespace PersMediaTek86.Modele
         /// <param name="idmotif"></param>
         /// <param name="libelle"></param>
         /// <param name="dateFin"></param>
-        public Absence(int idpersonnel, DateTime dateDebut, int idmotif, string libelle, DateTime dateFin)
+        public Absence(int idpersonnel, DateTime dateDebut, DateTime dateFin, int idmotif, string libelle)
         {
             this.idpersonnel = idpersonnel;
             this.dateDebut = dateDebut;
@@ -43,6 +43,10 @@ namespace PersMediaTek86.Modele
         /// </summary>
         public DateTime DateDebut { get => dateDebut; }
         /// <summary>
+        ///  Récupération de la date de fin de l'absence
+        /// </summary>
+        public DateTime DateFin { get => dateFin; }
+        /// <summary>
         /// Récupération de l'id du motif d'absence
         /// </summary>
         public int Idmotif { get => idmotif; }
@@ -50,10 +54,5 @@ namespace PersMediaTek86.Modele
         /// Récupération du libellé du motif d'absence
         /// </summary>
         public string Libelle { get => libelle; }
-        /// <summary>
-        ///  Récupération de la date de fin de l'absence
-        /// </summary>
-        public DateTime DateFin { get => dateFin; }
-
     }
 }

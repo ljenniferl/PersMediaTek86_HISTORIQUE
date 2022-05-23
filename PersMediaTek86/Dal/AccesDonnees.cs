@@ -18,6 +18,8 @@ namespace PersMediaTek86.Dal
         /// </summary>
         private static string connectionString = "server=localhost;user id=userDB;password=userDB;database=PersMediaTek86;SslMode=none";
 
+        // PARTIE PERSONNEL
+
         /// <summary>
         /// Récupère et retourne les personnels provenant de la BDD
         /// </summary>
@@ -108,6 +110,99 @@ namespace PersMediaTek86.Dal
             conn.ReqUpdate(req, parameters);
         }
 
+
+        // PARTIE ABSENCE
+
+        /// <summary>
+        /// Récupère et retourne les absences provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des absences</returns>
+        public static List<Absence> GetLesAbsences(int monId)
+        {
+            List<Absence> lesAbsences = new List<Absence>();
+            string req = "SELECT a.idpersonnel AS idpersonnel, a.datedebut AS dateDebut, a.idmotif AS idmotif, m.libelle AS libelle, a.datefin AS dateFin";
+            req += " FROM absence a JOIN personnel p ON(a.idpersonnel = p.idpersonnel) JOIN motif m ON(a.idmotif = m.idmotif)";
+            req += " WHERE a.idpersonnel = @idpersonnel";
+            req += " ORDER BY datedebut DESC;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", monId);
+            ConnexionBDD curs = ConnexionBDD.GetInstance(connectionString);
+            curs.ReqSelect(req, parameters);
+            while (curs.Read())
+            {
+                Absence absence = new Absence((int)curs.Field("idpersonnel"), (DateTime)curs.Field("dateDebut"), (DateTime)curs.Field("dateFin"), (int)curs.Field("idmotif"), (string)curs.Field("libelle"));
+                lesAbsences.Add(absence);
+            }
+            curs.Close();
+            return lesAbsences;
+        }
+
+        /// <summary>
+        /// Récupère et retourne les motifs d'absence provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des motifs d'absence</returns>
+        public static List<Motif> GetLesMotifs()
+        {
+            List<Motif> lesMotifs = new List<Motif>();
+            string req = "SELECT * FROM motif ORDER BY libelle;";
+            ConnexionBDD curs = ConnexionBDD.GetInstance(connectionString);
+            curs.ReqSelect(req, null);
+            while (curs.Read())
+            {
+                Motif motif = new Motif((int)curs.Field("idmotif"), (string)curs.Field("libelle"));
+                lesMotifs.Add(motif);
+            }
+            curs.Close();
+            return lesMotifs;
+        }
+
+        /// <summary>
+        /// Supprime une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à supprimer</param>
+        public static void DelAbsence(Absence absence)
+        {
+            string req = "DELETE FROM absence WHERE idpersonnel = @idpersonnel AND dateDebut = @dateDebut;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.Idpersonnel);
+            parameters.Add("@dateDebut", absence.DateDebut);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Ajoute une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à ajouter</param>
+        public static void AddAbsence(Absence absence)
+        {
+            string req = "INSERT INTO absence(idpersonnel, dateDebut, idmotif, dateFin)";
+            req += " VALUES(@idpersonnel, @dateDebut, @idmotif, @dateFin);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.Idpersonnel);
+            parameters.Add("@dateDebut", absence.DateDebut);
+            parameters.Add("@idmotif", absence.Idmotif);
+            parameters.Add("@dateFin", absence.DateFin);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Modifie une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à modifier</param>
+        public static void UpdateAbsence(Absence absence)
+        {
+            string req = "UPDATE absence SET dateFin = @dateFin, idmotif = @idmotif";
+            req += " WHERE idpersonnel = @idpersonnel AND dateDebut = @dateDebut;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.Idpersonnel);
+            parameters.Add("@dateDebut", absence.DateDebut);
+            parameters.Add("@dateFin", absence.DateFin);
+            parameters.Add("@idmotif", absence.Idmotif);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
 
 
     }

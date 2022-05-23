@@ -19,6 +19,14 @@ namespace PersMediaTek86
     public partial class FrmGestion : Form
     {
         /// <summary>
+        /// Paramètre récupérant l'id du personnel sélectionné
+        /// </summary>
+        public static int monId;
+        /// <summary>
+        /// Paramètre récupérant la date de début de l'absence sélectionnée
+        /// </summary>
+        public static DateTime maDateDebut;
+        /// <summary>
         /// Instance du controleur
         /// </summary>
         private Controle controle;
@@ -34,6 +42,15 @@ namespace PersMediaTek86
         /// Objet pour gérer la liste des services
         /// </summary>
         BindingSource bdgServices = new BindingSource();
+        /// <summary>
+        /// Objet pour gérer la liste des absences
+        /// </summary>
+        BindingSource bdgAbsences = new BindingSource();
+        /// <summary>
+        /// Objet pour gérer la liste des motifs d'absence
+        /// </summary>
+        BindingSource bdgMotifs = new BindingSource();
+
 
         /// <summary>
         /// Initialisation des composants graphiques
@@ -106,6 +123,7 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
             }
+            grbLePersonnel.Enabled = false;
         }
 
         /// <summary>
@@ -116,6 +134,8 @@ namespace PersMediaTek86
         private void btnAjoutPersonnel_Click(object sender, EventArgs e)
         {
             grbLePersonnel.Enabled = true;
+            grbLesAbsences.Enabled = false;
+            grbLAbsence.Enabled = false;
         }
 
         /// <summary>
@@ -142,7 +162,6 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
             }
-
         }
 
         /// <summary>
@@ -207,6 +226,183 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
             }
+        }
+
+        // PARTIE ABSENCE
+
+        /// <summary>
+        /// Affiche la liste des absences du personnel séléectionné dans dgvLesPersonnels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAffichAbsences_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnels.SelectedRows.Count > 0)
+            {
+                monId = (int)dgvPersonnels.CurrentRow.Cells["idpersonnel"].Value;
+                RemplirListeAbsences(monId);
+                RemplirListeMotifs();
+                grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = true;
+                grbLAbsence.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Affiche les absences dans dgvAbsences
+        /// </summary>
+        public void RemplirListeAbsences(int monId)
+        {
+            List<Absence> lesAbsences = controle.GetLesAbsences(monId);
+            bdgAbsences.DataSource = lesAbsences;
+            dgvAbsences.DataSource = bdgAbsences;
+            dgvAbsences.Columns["idpersonnel"].Visible = false;
+            dgvAbsences.Columns["idmotif"].Visible = false;
+            dgvAbsences.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Affiche les motifs dans cboMotif
+        /// </summary>
+        public void RemplirListeMotifs()
+        {
+            List<Motif> lesMotifs = controle.GetLesMotifs();
+            bdgMotifs.DataSource = lesMotifs;
+            cboMotif.DataSource = bdgMotifs;
+            if (cboMotif.Items.Count > 0)
+            {
+                cboMotif.SelectedIndex = -1;
+            }
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAjoutAbsence_Click(object sender, EventArgs e)
+        {
+            grbLePersonnel.Enabled = false;
+            grbLesAbsences.Enabled = false;
+            grbLAbsence.Enabled = true;
+        }
+
+        /// <summary>
+        ///  Demande de modification d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void btnModifAbsence_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                enCoursDeModif = true;
+                grbLesPersonnels.Enabled = false;
+                grbLePersonnel.Enabled = true;
+                grbLAbsence.Enabled = true;
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                dtpDateDebut.Value = absence.DateDebut;
+                dtpDateFin.Value = absence.DateFin;
+                cboMotif.SelectedIndex = cboMotif.FindStringExact(absence.Libelle);
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupprAbsence_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence démarrant le " + absence.DateDebut + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.DelAbsence(absence);
+                    RemplirListeAbsences(monId);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+            grbLePersonnel.Enabled = false;
+        }
+
+
+        /// <summary>
+        /// Vide les zones de saisie d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAnnulAbsence_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous vraiment annuler ?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                ViderAbsence();
+                grbLesPersonnels.Enabled = true;
+                enCoursDeModif = false;
+                grbLePersonnel.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Vider les zones de saisie d'une absence
+        /// </summary>
+        private void ViderAbsence()
+        {
+            dtpDateDebut.CustomFormat = "";
+            dtpDateFin.CustomFormat = "";
+            cboMotif.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Demande d'ajout ou de modification d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnregAbsence_Click(object sender, EventArgs e)
+        {
+            if (!dtpDateDebut.Value.Equals("") && !dtpDateFin.Value.Equals("") && cboMotif.SelectedIndex != -1)
+            {
+                Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
+                if (enCoursDeModif)
+                {
+                    monId = (int)dgvAbsences.CurrentRow.Cells["idpersonnel"].Value;
+                    maDateDebut = dtpDateDebut.Value;
+                }
+                Absence absence = new Absence(monId, dtpDateDebut.Value, dtpDateFin.Value, motif.Idmotif, motif.Libelle);
+                if (enCoursDeModif)
+                {
+                    controle.UpdateAbsence(absence);
+                    enCoursDeModif = false;
+                    grbLesPersonnels.Enabled = true;
+                    grbLePersonnel.Enabled = false;
+                }
+                else
+                {
+                    controle.AddAbsence(absence);
+                }
+                RemplirListeAbsences(monId);
+                ViderAbsence();
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+            }
+
+
+
         }
     }
 }
