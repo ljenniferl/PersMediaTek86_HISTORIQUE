@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PersMediaTek86.Dal;
 using PersMediaTek86.Modele;
+using PersMediaTek86.Vue;
 
 namespace PersMediaTek86.Controleur
 {
@@ -13,13 +14,43 @@ namespace PersMediaTek86.Controleur
     /// </summary>
     public class Controle
     {
+        // OUVERTURE DE L'APPLICATION ET CONTROLE DE LA CONNEXION
+
+        /// <summary>
+        /// Fenêtre d'authentification
+        /// </summary>
+        private FrmAuthentification frmAuthentification;
+
         /// <summary>
         /// Ouverture de la fenêtre
         /// </summary>
         public Controle()
         {
-            (new FrmGestion(this)).ShowDialog();
+            frmAuthentification = new FrmAuthentification(this);
+            frmAuthentification.ShowDialog();
         }
+
+        /// <summary>
+        /// Demande la vérification de l'authentification
+        /// Si l'authentification est correcte, ouvre la fenêtre principale
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public Boolean ControleAuthentification(string login, string pwd)
+        {
+            if (AccesDonnees.ControleAuthentification(login, pwd))
+            {
+                frmAuthentification.Hide();
+                (new FrmGestion(this)).ShowDialog();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         // PARTIE PERSONNEL
 

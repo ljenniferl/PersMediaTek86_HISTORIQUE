@@ -42,8 +42,9 @@ namespace PersMediaTek86.Vue
             this.btnConnexion.Name = "btnConnexion";
             this.btnConnexion.Size = new System.Drawing.Size(180, 30);
             this.btnConnexion.TabIndex = 0;
-            this.btnConnexion.Text = "Se connecter";
+            this.btnConnexion.Text = "Connexion";
             this.btnConnexion.UseVisualStyleBackColor = true;
+            this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
             // txtLogin
             // 

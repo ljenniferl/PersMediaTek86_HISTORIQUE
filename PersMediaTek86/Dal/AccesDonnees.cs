@@ -18,6 +18,37 @@ namespace PersMediaTek86.Dal
         /// </summary>
         private static string connectionString = "server=localhost;user id=userDB;password=userDB;database=PersMediaTek86;SslMode=none";
 
+        /// <summary>
+        /// Controle si l'utilisateur a le droit de se connecter (login, pwd)
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public static Boolean ControleAuthentification(string login, string pwd)
+        {
+            string req = "SELECT * FROM responsable r";
+            req += " WHERE r.login = @login AND pwd = SHA2(@pwd, 256);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@login", login);
+            parameters.Add("@pwd", pwd);
+            ConnexionBDD curs = ConnexionBDD.GetInstance(connectionString);
+            curs.ReqSelect(req, parameters);
+            if (curs.Read())
+            {
+                curs.Close();
+                return true;
+            }
+            else
+            {
+                curs.Close();
+                return false;
+            }
+        }
+
+
+
+
+
         // PARTIE PERSONNEL
 
         /// <summary>
