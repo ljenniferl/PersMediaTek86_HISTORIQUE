@@ -30,7 +30,7 @@ namespace PersMediaTek86.Connexion
         /// <summary>
         /// Constructeur privé pour créer la connexion à la BDD et l'ouvrir
         /// </summary>
-        /// <param name="stringConnect">chaine de connexion</param>
+        /// <param name="stringConnect">Chaine de connexion</param>
         private ConnexionBDD(string stringConnect)
         {
             try
@@ -48,8 +48,8 @@ namespace PersMediaTek86.Connexion
         /// <summary>
         /// Crée une instance unique de la classe
         /// </summary>
-        /// <param name="stringConnect">chaine de connexion</param>
-        /// <returns>instance unique de la classe</returns>
+        /// <param name="stringConnect">Chaine de connexion</param>
+        /// <returns>Instance unique de la classe</returns>
         public static ConnexionBDD GetInstance(string stringConnect)
         {
             if (instance is null)
@@ -62,8 +62,8 @@ namespace PersMediaTek86.Connexion
         /// <summary>
         /// Exécution d'une requête autre que "select"
         /// </summary>
-        /// <param name="stringQuery">requête autre que select</param>
-        /// <param name="parameters">dictionnaire contenant les paramètres</param>
+        /// <param name="stringQuery">Requête autre que select</param>
+        /// <param name="parameters">Dictionnaire contenant les paramètres</param>
         public void ReqUpdate(string stringQuery, Dictionary<string, object> parameters)
         {
             try
@@ -88,8 +88,8 @@ namespace PersMediaTek86.Connexion
         /// <summary>
         /// Exécute une requête type "select" et valorise le curseur
         /// </summary>
-        /// <param name="stringQuery">requête select</param>
-        /// <param name="parameters">dictionnaire contenant les paramètres</param>
+        /// <param name="stringQuery">Requête select</param>
+        /// <param name="parameters">Dictionnaire contenant les paramètres</param>
         public void ReqSelect(string stringQuery, Dictionary<string, object> parameters)
         {
             try
@@ -114,7 +114,7 @@ namespace PersMediaTek86.Connexion
         /// <summary>
         /// Tente de lire la ligne suivante du curseur
         /// </summary>
-        /// <returns>false si fin de curseur atteinte</returns>
+        /// <returns>False si fin de curseur atteinte</returns>
         public bool Read()
         {
             if (reader is null)
@@ -134,8 +134,8 @@ namespace PersMediaTek86.Connexion
         /// <summary>
         /// Retourne le contenu d'un champ dont le nom est passé en paramètre
         /// </summary>
-        /// <param name="nameField">nom du champ</param>
-        /// <returns>valeur du champ</returns>
+        /// <param name="nameField">Nom du champ</param>
+        /// <returns>Valeur du champ</returns>
         public object Field(string nameField)
         {
             if (reader is null)

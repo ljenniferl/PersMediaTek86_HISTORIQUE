@@ -34,11 +34,11 @@ namespace PersMediaTek86.Modele
         /// Récupération du libellé de l'absence
         /// </summary>
         public string Libelle { get => libelle; }
-
+        
         /// <summary>
-        /// Définit l'information à afficher (juste le nom)
+        /// Définit l'information à afficher (juste le libellé du otif d'absence)
         /// </summary>
-        /// <returns>libellé du motif d'absence</returns>
+        /// <returns>Libellé du motif d'absence</returns>
         public override string ToString()
         {
             return this.libelle;

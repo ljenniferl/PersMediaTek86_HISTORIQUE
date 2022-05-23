@@ -57,6 +57,7 @@ namespace PersMediaTek86.Vue
             // 
             this.txtPwd.Location = new System.Drawing.Point(156, 86);
             this.txtPwd.Name = "txtPwd";
+            this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(180, 22);
             this.txtPwd.TabIndex = 2;
             // 

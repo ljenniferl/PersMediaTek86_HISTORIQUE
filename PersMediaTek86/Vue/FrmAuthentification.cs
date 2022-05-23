@@ -17,7 +17,7 @@ namespace PersMediaTek86.Vue
     public partial class FrmAuthentification : Form
     {
         /// <summary>
-        /// Instance du controleur
+        /// Instance du contrôleur
         /// </summary>
         private Controle controle;
 
@@ -51,6 +51,9 @@ namespace PersMediaTek86.Vue
             else
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+                txtLogin.Text = "";
+                txtPwd.Text = "";
+                txtLogin.Focus();
             }
         }
     }

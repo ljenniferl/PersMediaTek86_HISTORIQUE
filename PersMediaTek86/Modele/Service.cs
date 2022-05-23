@@ -35,9 +35,9 @@ namespace PersMediaTek86.Modele
         public string Nom { get => nom; }
 
         /// <summary>
-        /// Définit l'information à afficher (juste le nom)
+        /// Définit l'information à afficher (juste le nom du service)
         /// </summary>
-        /// <returns>nom du service</returns>
+        /// <returns>Nom du service</returns>
         public override string ToString()
         {
             return this.nom;

@@ -19,7 +19,7 @@ namespace PersMediaTek86.Dal
         private static string connectionString = "server=localhost;user id=userDB;password=userDB;database=PersMediaTek86;SslMode=none";
 
         /// <summary>
-        /// Controle si l'utilisateur a le droit de se connecter (login, pwd)
+        /// Contrôle si l'utilisateur a le droit de se connecter (login, pwd)
         /// </summary>
         /// <param name="login"></param>
         /// <param name="pwd"></param>
@@ -44,9 +44,6 @@ namespace PersMediaTek86.Dal
                 return false;
             }
         }
-
-
-
 
 
         // PARTIE PERSONNEL
@@ -234,7 +231,5 @@ namespace PersMediaTek86.Dal
             ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
             conn.ReqUpdate(req, parameters);
         }
-
-
     }
 }

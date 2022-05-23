@@ -19,15 +19,15 @@ namespace PersMediaTek86
     public partial class FrmGestion : Form
     {
         /// <summary>
-        /// Paramètre récupérant l'id du personnel sélectionné
+        /// Paramètre récupérant l'id du personnel sélectionné dans dgvPersonnels
         /// </summary>
         public static int monId;
         /// <summary>
-        /// Paramètre récupérant la date de début de l'absence sélectionnée
+        /// Paramètre récupérant la date de début de l'absence sélectionnée dans dgvAbsences
         /// </summary>
         public static DateTime maDateDebut;
         /// <summary>
-        /// Instance du controleur
+        /// Instance du contrôleur
         /// </summary>
         private Controle controle;
         /// <summary>
@@ -54,7 +54,7 @@ namespace PersMediaTek86
 
         /// <summary>
         /// Initialisation des composants graphiques
-        /// Récupération du controleur
+        /// Récupération du contrôleur
         /// </summary>
         /// <param name="controle"></param>
         public FrmGestion(Controle controle)
@@ -133,6 +133,10 @@ namespace PersMediaTek86
         /// <param name="e"></param>
         private void btnAjoutPersonnel_Click(object sender, EventArgs e)
         {
+            btnModifPersonnel.Enabled = false;
+            btnSupprPersonnel.Enabled = false;
+            btnAffichAbsences.Enabled = false;
+            grbLesPersonnels.Enabled = false;
             grbLePersonnel.Enabled = true;
             grbLesAbsences.Enabled = false;
             grbLAbsence.Enabled = false;
@@ -151,6 +155,8 @@ namespace PersMediaTek86
                 enCoursDeModif = true;
                 grbLesPersonnels.Enabled = false;
                 grbLePersonnel.Enabled = true;
+                grbLesAbsences.Enabled = false;
+                grbLAbsence.Enabled = false;
                 Personnel personnel = (Personnel)bdgPersonnels.List[bdgPersonnels.Position];
                 txtNom.Text = personnel.Nom;
                 txtPrenom.Text = personnel.Prenom;
@@ -177,6 +183,12 @@ namespace PersMediaTek86
                 grbLesPersonnels.Enabled = true;
                 enCoursDeModif = false;
                 grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = false;
+                grbLAbsence.Enabled = false;
+                btnAjoutPersonnel.Enabled = true;
+                btnModifPersonnel.Enabled = true;
+                btnSupprPersonnel.Enabled = true;
+                btnAffichAbsences.Enabled = true;
             }
         }
 
@@ -221,6 +233,10 @@ namespace PersMediaTek86
                 }
                 RemplirListePersonnels();
                 ViderPersonnel();
+                grbLesPersonnels.Enabled = true;
+                grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = false;
+                grbLAbsence.Enabled = false;
             }
             else
             {
@@ -231,7 +247,7 @@ namespace PersMediaTek86
         // PARTIE ABSENCE
 
         /// <summary>
-        /// Affiche la liste des absences du personnel séléectionné dans dgvLesPersonnels
+        /// Affiche la liste des absences du personnel sélectionné dans dgvPersonnels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -242,9 +258,12 @@ namespace PersMediaTek86
                 monId = (int)dgvPersonnels.CurrentRow.Cells["idpersonnel"].Value;
                 RemplirListeAbsences(monId);
                 RemplirListeMotifs();
+                btnAjoutPersonnel.Enabled = false;
+                btnModifPersonnel.Enabled = false;
+                btnSupprPersonnel.Enabled = false;
                 grbLePersonnel.Enabled = false;
                 grbLesAbsences.Enabled = true;
-                grbLAbsence.Enabled = true;
+                grbLAbsence.Enabled = false;
             }
             else
             {
@@ -286,6 +305,8 @@ namespace PersMediaTek86
         /// <param name="e"></param>
         private void btnAjoutAbsence_Click(object sender, EventArgs e)
         {
+            btnModifAbsence.Enabled = false;
+            btnSupprAbsence.Enabled = false;
             grbLePersonnel.Enabled = false;
             grbLesAbsences.Enabled = false;
             grbLAbsence.Enabled = true;
@@ -303,8 +324,9 @@ namespace PersMediaTek86
             {
                 enCoursDeModif = true;
                 grbLesPersonnels.Enabled = false;
-                grbLePersonnel.Enabled = true;
+                grbLePersonnel.Enabled = false;
                 grbLAbsence.Enabled = true;
+                dtpDateDebut.Enabled = false;
                 Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
                 dtpDateDebut.Value = absence.DateDebut;
                 dtpDateFin.Value = absence.DateFin;
@@ -326,7 +348,7 @@ namespace PersMediaTek86
             if (dgvAbsences.SelectedRows.Count > 0)
             {
                 Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence démarrant le " + absence.DateDebut + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence débutant le " + absence.DateDebut + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     controle.DelAbsence(absence);
                     RemplirListeAbsences(monId);
@@ -337,6 +359,7 @@ namespace PersMediaTek86
                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
             }
             grbLePersonnel.Enabled = false;
+            grbLAbsence.Enabled = false;
         }
 
 
@@ -353,6 +376,8 @@ namespace PersMediaTek86
                 grbLesPersonnels.Enabled = true;
                 enCoursDeModif = false;
                 grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = true;
+                grbLAbsence.Enabled = false;
             }
         }
 
@@ -384,6 +409,13 @@ namespace PersMediaTek86
                 Absence absence = new Absence(monId, dtpDateDebut.Value, dtpDateFin.Value, motif.Idmotif, motif.Libelle);
                 if (enCoursDeModif)
                 {
+                    // TEST dates début et fin + activation champs dateFin et cboMotif pour correction
+                    if (dtpDateDebut.Value > dtpDateFin.Value)
+                    {
+                        MessageBox.Show("La date de début est postérieure à la date de fin. Veuillez rectifier.", "Alerte");
+                        dtpDateFin.Enabled = true;
+                        cboMotif.Enabled = true;
+                    }
                     controle.UpdateAbsence(absence);
                     enCoursDeModif = false;
                     grbLesPersonnels.Enabled = true;
@@ -400,9 +432,31 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
             }
+            grbLePersonnel.Enabled = false;
+            grbLesAbsences.Enabled = true;
+            grbLAbsence.Enabled = false;
+            btnAjoutAbsence.Enabled = true;
+            btnModifAbsence.Enabled = true;
+            btnSupprAbsence.Enabled = true;
+        }
 
-
-
+        /// <summary>
+        /// Lors de la séection d'un autre personnel dans dgvPersonnels :
+        /// - Vide la liste des absences
+        /// - Active les boutons de grbPersonnels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvPersonnels_SelectionChanged(object sender, EventArgs e)
+        {
+            dgvAbsences.Rows.Clear();
+            btnAjoutPersonnel.Enabled = true;
+            btnModifPersonnel.Enabled = true;
+            btnSupprPersonnel.Enabled = true;
+            btnAffichAbsences.Enabled = true;
+            grbLePersonnel.Enabled = false;
+            grbLesAbsences.Enabled = false;
+            grbLAbsence.Enabled = false;
         }
     }
 }

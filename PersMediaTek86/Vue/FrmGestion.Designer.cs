@@ -134,8 +134,10 @@ namespace PersMediaTek86
             this.dgvPersonnels.ReadOnly = true;
             this.dgvPersonnels.RowHeadersWidth = 51;
             this.dgvPersonnels.RowTemplate.Height = 24;
+            this.dgvPersonnels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonnels.Size = new System.Drawing.Size(500, 166);
             this.dgvPersonnels.TabIndex = 0;
+            this.dgvPersonnels.SelectionChanged += new System.EventHandler(this.dgvPersonnels_SelectionChanged);
             // 
             // grbLesAbsences
             // 
