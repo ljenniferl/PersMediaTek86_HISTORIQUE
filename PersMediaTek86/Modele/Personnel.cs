@@ -68,5 +68,8 @@ namespace PersMediaTek86.Modele
         /// Récupération du nom du service
         /// </summary>
         public string Service { get => service; }
+
+
+
     }
 }

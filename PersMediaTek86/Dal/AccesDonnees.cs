@@ -18,6 +18,8 @@ namespace PersMediaTek86.Dal
         /// </summary>
         private static string connectionString = "server=localhost;user id=userDB;password=userDB;database=PersMediaTek86;SslMode=none";
 
+        // PARTIE PERSONNEL
+
         /// <summary>
         /// Contrôle si l'utilisateur a le droit de se connecter (login, pwd)
         /// </summary>
