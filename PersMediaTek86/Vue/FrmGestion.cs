@@ -409,17 +409,20 @@ namespace PersMediaTek86
                 Absence absence = new Absence(monId, dtpDateDebut.Value, dtpDateFin.Value, motif.Idmotif, motif.Libelle);
                 if (enCoursDeModif)
                 {
-                    // TEST dates début et fin + activation champs dateFin et cboMotif pour correction
                     if (dtpDateDebut.Value > dtpDateFin.Value)
                     {
                         MessageBox.Show("La date de début est postérieure à la date de fin. Veuillez rectifier.", "Alerte");
                         dtpDateFin.Enabled = true;
                         cboMotif.Enabled = true;
+                        return;
                     }
-                    controle.UpdateAbsence(absence);
-                    enCoursDeModif = false;
-                    grbLesPersonnels.Enabled = true;
-                    grbLePersonnel.Enabled = false;
+                    else
+                    {
+                        controle.UpdateAbsence(absence);
+                        enCoursDeModif = false;
+                        grbLesPersonnels.Enabled = true;
+                        grbLePersonnel.Enabled = false;
+                    }
                 }
                 else
                 {
