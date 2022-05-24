@@ -34,38 +34,38 @@ namespace PersMediaTek86
             this.btnModifPersonnel = new System.Windows.Forms.Button();
             this.btnAjoutPersonnel = new System.Windows.Forms.Button();
             this.btnAffichAbsences = new System.Windows.Forms.Button();
-            this.dgvLesPersonnels = new System.Windows.Forms.DataGridView();
+            this.dgvPersonnels = new System.Windows.Forms.DataGridView();
             this.grbLesAbsences = new System.Windows.Forms.GroupBox();
             this.btnSupprAbsence = new System.Windows.Forms.Button();
             this.btnModifAbsence = new System.Windows.Forms.Button();
             this.btnAjoutAbsence = new System.Windows.Forms.Button();
-            this.dgvLesAbsences = new System.Windows.Forms.DataGridView();
+            this.dgvAbsences = new System.Windows.Forms.DataGridView();
             this.grbLePersonnel = new System.Windows.Forms.GroupBox();
-            this.txtNom = new System.Windows.Forms.TextBox();
-            this.txtPrenom = new System.Windows.Forms.TextBox();
-            this.txtTel = new System.Windows.Forms.TextBox();
-            this.txtMail = new System.Windows.Forms.TextBox();
-            this.cboService = new System.Windows.Forms.ComboBox();
-            this.lblNom = new System.Windows.Forms.Label();
-            this.lblPrenom = new System.Windows.Forms.Label();
-            this.lblTel = new System.Windows.Forms.Label();
-            this.lblMail = new System.Windows.Forms.Label();
-            this.lblService = new System.Windows.Forms.Label();
-            this.btnAnnulPersonnel = new System.Windows.Forms.Button();
             this.btnEnregPersonnel = new System.Windows.Forms.Button();
+            this.btnAnnulPersonnel = new System.Windows.Forms.Button();
+            this.lblService = new System.Windows.Forms.Label();
+            this.lblMail = new System.Windows.Forms.Label();
+            this.lblTel = new System.Windows.Forms.Label();
+            this.lblPrenom = new System.Windows.Forms.Label();
+            this.lblNom = new System.Windows.Forms.Label();
+            this.cboService = new System.Windows.Forms.ComboBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.txtTel = new System.Windows.Forms.TextBox();
+            this.txtPrenom = new System.Windows.Forms.TextBox();
+            this.txtNom = new System.Windows.Forms.TextBox();
             this.grbLAbsence = new System.Windows.Forms.GroupBox();
+            this.dtpDateFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateDebut = new System.Windows.Forms.DateTimePicker();
             this.btnEnregAbsence = new System.Windows.Forms.Button();
             this.btnAnnulAbsence = new System.Windows.Forms.Button();
             this.lblMotif = new System.Windows.Forms.Label();
             this.lblDateFin = new System.Windows.Forms.Label();
             this.lblDateDebut = new System.Windows.Forms.Label();
             this.cboMotif = new System.Windows.Forms.ComboBox();
-            this.dtpDateDebut = new System.Windows.Forms.DateTimePicker();
-            this.dtpDateFin = new System.Windows.Forms.DateTimePicker();
             this.grbLesPersonnels.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLesPersonnels)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnels)).BeginInit();
             this.grbLesAbsences.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLesAbsences)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAbsences)).BeginInit();
             this.grbLePersonnel.SuspendLayout();
             this.grbLAbsence.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +76,7 @@ namespace PersMediaTek86
             this.grbLesPersonnels.Controls.Add(this.btnModifPersonnel);
             this.grbLesPersonnels.Controls.Add(this.btnAjoutPersonnel);
             this.grbLesPersonnels.Controls.Add(this.btnAffichAbsences);
-            this.grbLesPersonnels.Controls.Add(this.dgvLesPersonnels);
+            this.grbLesPersonnels.Controls.Add(this.dgvPersonnels);
             this.grbLesPersonnels.Location = new System.Drawing.Point(12, 12);
             this.grbLesPersonnels.Name = "grbLesPersonnels";
             this.grbLesPersonnels.Size = new System.Drawing.Size(530, 250);
@@ -120,22 +120,22 @@ namespace PersMediaTek86
             this.btnAffichAbsences.Text = "Afficher les absences";
             this.btnAffichAbsences.UseVisualStyleBackColor = true;
             // 
-            // dgvLesPersonnels
+            // dgvPersonnels
             // 
-            this.dgvLesPersonnels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLesPersonnels.Location = new System.Drawing.Point(14, 31);
-            this.dgvLesPersonnels.Name = "dgvLesPersonnels";
-            this.dgvLesPersonnels.RowHeadersWidth = 51;
-            this.dgvLesPersonnels.RowTemplate.Height = 24;
-            this.dgvLesPersonnels.Size = new System.Drawing.Size(500, 166);
-            this.dgvLesPersonnels.TabIndex = 0;
+            this.dgvPersonnels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPersonnels.Location = new System.Drawing.Point(14, 31);
+            this.dgvPersonnels.Name = "dgvPersonnels";
+            this.dgvPersonnels.RowHeadersWidth = 51;
+            this.dgvPersonnels.RowTemplate.Height = 24;
+            this.dgvPersonnels.Size = new System.Drawing.Size(500, 166);
+            this.dgvPersonnels.TabIndex = 0;
             // 
             // grbLesAbsences
             // 
             this.grbLesAbsences.Controls.Add(this.btnSupprAbsence);
             this.grbLesAbsences.Controls.Add(this.btnModifAbsence);
             this.grbLesAbsences.Controls.Add(this.btnAjoutAbsence);
-            this.grbLesAbsences.Controls.Add(this.dgvLesAbsences);
+            this.grbLesAbsences.Controls.Add(this.dgvAbsences);
             this.grbLesAbsences.Location = new System.Drawing.Point(570, 12);
             this.grbLesAbsences.Name = "grbLesAbsences";
             this.grbLesAbsences.Size = new System.Drawing.Size(530, 250);
@@ -170,15 +170,15 @@ namespace PersMediaTek86
             this.btnAjoutAbsence.Text = "Ajouter";
             this.btnAjoutAbsence.UseVisualStyleBackColor = true;
             // 
-            // dgvLesAbsences
+            // dgvAbsences
             // 
-            this.dgvLesAbsences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLesAbsences.Location = new System.Drawing.Point(14, 31);
-            this.dgvLesAbsences.Name = "dgvLesAbsences";
-            this.dgvLesAbsences.RowHeadersWidth = 51;
-            this.dgvLesAbsences.RowTemplate.Height = 24;
-            this.dgvLesAbsences.Size = new System.Drawing.Size(500, 166);
-            this.dgvLesAbsences.TabIndex = 0;
+            this.dgvAbsences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAbsences.Location = new System.Drawing.Point(14, 31);
+            this.dgvAbsences.Name = "dgvAbsences";
+            this.dgvAbsences.RowHeadersWidth = 51;
+            this.dgvAbsences.RowTemplate.Height = 24;
+            this.dgvAbsences.Size = new System.Drawing.Size(500, 166);
+            this.dgvAbsences.TabIndex = 0;
             // 
             // grbLePersonnel
             // 
@@ -201,86 +201,14 @@ namespace PersMediaTek86
             this.grbLePersonnel.TabStop = false;
             this.grbLePersonnel.Text = "Données personnel";
             // 
-            // txtNom
+            // btnEnregPersonnel
             // 
-            this.txtNom.Location = new System.Drawing.Point(113, 35);
-            this.txtNom.Name = "txtNom";
-            this.txtNom.Size = new System.Drawing.Size(130, 22);
-            this.txtNom.TabIndex = 0;
-            // 
-            // txtPrenom
-            // 
-            this.txtPrenom.Location = new System.Drawing.Point(354, 35);
-            this.txtPrenom.Name = "txtPrenom";
-            this.txtPrenom.Size = new System.Drawing.Size(130, 22);
-            this.txtPrenom.TabIndex = 1;
-            // 
-            // txtTel
-            // 
-            this.txtTel.Location = new System.Drawing.Point(113, 78);
-            this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(130, 22);
-            this.txtTel.TabIndex = 2;
-            // 
-            // txtMail
-            // 
-            this.txtMail.Location = new System.Drawing.Point(354, 78);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(130, 22);
-            this.txtMail.TabIndex = 3;
-            // 
-            // cboService
-            // 
-            this.cboService.FormattingEnabled = true;
-            this.cboService.Location = new System.Drawing.Point(113, 119);
-            this.cboService.Name = "cboService";
-            this.cboService.Size = new System.Drawing.Size(130, 24);
-            this.cboService.TabIndex = 4;
-            // 
-            // lblNom
-            // 
-            this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(31, 38);
-            this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(37, 17);
-            this.lblNom.TabIndex = 5;
-            this.lblNom.Text = "Nom";
-            // 
-            // lblPrenom
-            // 
-            this.lblPrenom.AutoSize = true;
-            this.lblPrenom.Location = new System.Drawing.Point(287, 38);
-            this.lblPrenom.Name = "lblPrenom";
-            this.lblPrenom.Size = new System.Drawing.Size(57, 17);
-            this.lblPrenom.TabIndex = 6;
-            this.lblPrenom.Text = "Prénom";
-            // 
-            // lblTel
-            // 
-            this.lblTel.AutoSize = true;
-            this.lblTel.Location = new System.Drawing.Point(31, 81);
-            this.lblTel.Name = "lblTel";
-            this.lblTel.Size = new System.Drawing.Size(76, 17);
-            this.lblTel.TabIndex = 7;
-            this.lblTel.Text = "Téléphone";
-            // 
-            // lblMail
-            // 
-            this.lblMail.AutoSize = true;
-            this.lblMail.Location = new System.Drawing.Point(287, 81);
-            this.lblMail.Name = "lblMail";
-            this.lblMail.Size = new System.Drawing.Size(33, 17);
-            this.lblMail.TabIndex = 8;
-            this.lblMail.Text = "Mail";
-            // 
-            // lblService
-            // 
-            this.lblService.AutoSize = true;
-            this.lblService.Location = new System.Drawing.Point(31, 122);
-            this.lblService.Name = "lblService";
-            this.lblService.Size = new System.Drawing.Size(55, 17);
-            this.lblService.TabIndex = 9;
-            this.lblService.Text = "Service";
+            this.btnEnregPersonnel.Location = new System.Drawing.Point(424, 158);
+            this.btnEnregPersonnel.Name = "btnEnregPersonnel";
+            this.btnEnregPersonnel.Size = new System.Drawing.Size(90, 30);
+            this.btnEnregPersonnel.TabIndex = 11;
+            this.btnEnregPersonnel.Text = "Enregistrer";
+            this.btnEnregPersonnel.UseVisualStyleBackColor = true;
             // 
             // btnAnnulPersonnel
             // 
@@ -291,14 +219,86 @@ namespace PersMediaTek86
             this.btnAnnulPersonnel.Text = "Annuler";
             this.btnAnnulPersonnel.UseVisualStyleBackColor = true;
             // 
-            // btnEnregPersonnel
+            // lblService
             // 
-            this.btnEnregPersonnel.Location = new System.Drawing.Point(424, 158);
-            this.btnEnregPersonnel.Name = "btnEnregPersonnel";
-            this.btnEnregPersonnel.Size = new System.Drawing.Size(90, 30);
-            this.btnEnregPersonnel.TabIndex = 11;
-            this.btnEnregPersonnel.Text = "Enregistrer";
-            this.btnEnregPersonnel.UseVisualStyleBackColor = true;
+            this.lblService.AutoSize = true;
+            this.lblService.Location = new System.Drawing.Point(31, 122);
+            this.lblService.Name = "lblService";
+            this.lblService.Size = new System.Drawing.Size(55, 17);
+            this.lblService.TabIndex = 9;
+            this.lblService.Text = "Service";
+            // 
+            // lblMail
+            // 
+            this.lblMail.AutoSize = true;
+            this.lblMail.Location = new System.Drawing.Point(287, 81);
+            this.lblMail.Name = "lblMail";
+            this.lblMail.Size = new System.Drawing.Size(33, 17);
+            this.lblMail.TabIndex = 8;
+            this.lblMail.Text = "Mail";
+            // 
+            // lblTel
+            // 
+            this.lblTel.AutoSize = true;
+            this.lblTel.Location = new System.Drawing.Point(31, 81);
+            this.lblTel.Name = "lblTel";
+            this.lblTel.Size = new System.Drawing.Size(76, 17);
+            this.lblTel.TabIndex = 7;
+            this.lblTel.Text = "Téléphone";
+            // 
+            // lblPrenom
+            // 
+            this.lblPrenom.AutoSize = true;
+            this.lblPrenom.Location = new System.Drawing.Point(287, 38);
+            this.lblPrenom.Name = "lblPrenom";
+            this.lblPrenom.Size = new System.Drawing.Size(57, 17);
+            this.lblPrenom.TabIndex = 6;
+            this.lblPrenom.Text = "Prénom";
+            // 
+            // lblNom
+            // 
+            this.lblNom.AutoSize = true;
+            this.lblNom.Location = new System.Drawing.Point(31, 38);
+            this.lblNom.Name = "lblNom";
+            this.lblNom.Size = new System.Drawing.Size(37, 17);
+            this.lblNom.TabIndex = 5;
+            this.lblNom.Text = "Nom";
+            // 
+            // cboService
+            // 
+            this.cboService.FormattingEnabled = true;
+            this.cboService.Location = new System.Drawing.Point(113, 119);
+            this.cboService.Name = "cboService";
+            this.cboService.Size = new System.Drawing.Size(130, 24);
+            this.cboService.TabIndex = 4;
+            // 
+            // txtMail
+            // 
+            this.txtMail.Location = new System.Drawing.Point(354, 78);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(130, 22);
+            this.txtMail.TabIndex = 3;
+            // 
+            // txtTel
+            // 
+            this.txtTel.Location = new System.Drawing.Point(113, 78);
+            this.txtTel.Name = "txtTel";
+            this.txtTel.Size = new System.Drawing.Size(130, 22);
+            this.txtTel.TabIndex = 2;
+            // 
+            // txtPrenom
+            // 
+            this.txtPrenom.Location = new System.Drawing.Point(354, 35);
+            this.txtPrenom.Name = "txtPrenom";
+            this.txtPrenom.Size = new System.Drawing.Size(130, 22);
+            this.txtPrenom.TabIndex = 1;
+            // 
+            // txtNom
+            // 
+            this.txtNom.Location = new System.Drawing.Point(113, 35);
+            this.txtNom.Name = "txtNom";
+            this.txtNom.Size = new System.Drawing.Size(130, 22);
+            this.txtNom.TabIndex = 0;
             // 
             // grbLAbsence
             // 
@@ -316,6 +316,20 @@ namespace PersMediaTek86
             this.grbLAbsence.TabIndex = 12;
             this.grbLAbsence.TabStop = false;
             this.grbLAbsence.Text = "Données personnel";
+            // 
+            // dtpDateFin
+            // 
+            this.dtpDateFin.Location = new System.Drawing.Point(232, 73);
+            this.dtpDateFin.Name = "dtpDateFin";
+            this.dtpDateFin.Size = new System.Drawing.Size(200, 22);
+            this.dtpDateFin.TabIndex = 13;
+            // 
+            // dtpDateDebut
+            // 
+            this.dtpDateDebut.Location = new System.Drawing.Point(232, 33);
+            this.dtpDateDebut.Name = "dtpDateDebut";
+            this.dtpDateDebut.Size = new System.Drawing.Size(200, 22);
+            this.dtpDateDebut.TabIndex = 12;
             // 
             // btnEnregAbsence
             // 
@@ -370,20 +384,6 @@ namespace PersMediaTek86
             this.cboMotif.Size = new System.Drawing.Size(200, 24);
             this.cboMotif.TabIndex = 4;
             // 
-            // dtpDateDebut
-            // 
-            this.dtpDateDebut.Location = new System.Drawing.Point(232, 33);
-            this.dtpDateDebut.Name = "dtpDateDebut";
-            this.dtpDateDebut.Size = new System.Drawing.Size(200, 22);
-            this.dtpDateDebut.TabIndex = 12;
-            // 
-            // dtpDateFin
-            // 
-            this.dtpDateFin.Location = new System.Drawing.Point(232, 73);
-            this.dtpDateFin.Name = "dtpDateFin";
-            this.dtpDateFin.Size = new System.Drawing.Size(200, 22);
-            this.dtpDateFin.TabIndex = 13;
-            // 
             // FrmGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -396,9 +396,9 @@ namespace PersMediaTek86
             this.Name = "FrmGestion";
             this.Text = "Personnel MediaTek86";
             this.grbLesPersonnels.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLesPersonnels)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnels)).EndInit();
             this.grbLesAbsences.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLesAbsences)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAbsences)).EndInit();
             this.grbLePersonnel.ResumeLayout(false);
             this.grbLePersonnel.PerformLayout();
             this.grbLAbsence.ResumeLayout(false);
@@ -410,7 +410,7 @@ namespace PersMediaTek86
         #endregion
 
         private System.Windows.Forms.GroupBox grbLesPersonnels;
-        private System.Windows.Forms.DataGridView dgvLesPersonnels;
+        private System.Windows.Forms.DataGridView dgvPersonnels;
         private System.Windows.Forms.Button btnSupprPersonnel;
         private System.Windows.Forms.Button btnModifPersonnel;
         private System.Windows.Forms.Button btnAjoutPersonnel;
@@ -419,7 +419,7 @@ namespace PersMediaTek86
         private System.Windows.Forms.Button btnSupprAbsence;
         private System.Windows.Forms.Button btnModifAbsence;
         private System.Windows.Forms.Button btnAjoutAbsence;
-        private System.Windows.Forms.DataGridView dgvLesAbsences;
+        private System.Windows.Forms.DataGridView dgvAbsences;
         private System.Windows.Forms.GroupBox grbLePersonnel;
         private System.Windows.Forms.ComboBox cboService;
         private System.Windows.Forms.TextBox txtMail;

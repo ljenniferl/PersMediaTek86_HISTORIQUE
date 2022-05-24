@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PersMediaTek86.Dal;
+using PersMediaTek86.Modele;
 using PersMediaTek86.Vue;
 
 namespace PersMediaTek86.Controleur
@@ -19,5 +21,25 @@ namespace PersMediaTek86.Controleur
         {
             (new FrmGestion(this)).ShowDialog();
         }
+
+        /// <summary>
+        /// Récupère et retourne les infos des personnels provenant de la BDD
+        /// </summary>
+        /// <returns>liste des personnels</returns>
+        public List<Personnel> GetLesPersonnels()
+        {
+            return AccesDonnees.GetLesPersonnels();
+        }
+
+        /// <summary>
+        /// Récupère et retourne les infos des services provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des services</returns>
+        public List<Service> GetLesServices()
+        {
+            return AccesDonnees.GetLesServices();
+        }
+
+
     }
 }
