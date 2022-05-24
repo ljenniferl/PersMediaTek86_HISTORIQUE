@@ -122,6 +122,7 @@ namespace PersMediaTek86
             this.btnAffichAbsences.TabIndex = 1;
             this.btnAffichAbsences.Text = "Afficher les absences";
             this.btnAffichAbsences.UseVisualStyleBackColor = true;
+            this.btnAffichAbsences.Click += new System.EventHandler(this.btnAffichAbsences_Click);
             // 
             // dgvPersonnels
             // 
@@ -320,20 +321,20 @@ namespace PersMediaTek86
             this.grbLAbsence.Size = new System.Drawing.Size(530, 200);
             this.grbLAbsence.TabIndex = 12;
             this.grbLAbsence.TabStop = false;
-            this.grbLAbsence.Text = "Données personnel";
+            this.grbLAbsence.Text = "Données absence";
             // 
             // dtpDateFin
             // 
-            this.dtpDateFin.Location = new System.Drawing.Point(232, 73);
+            this.dtpDateFin.Location = new System.Drawing.Point(203, 73);
             this.dtpDateFin.Name = "dtpDateFin";
-            this.dtpDateFin.Size = new System.Drawing.Size(200, 22);
+            this.dtpDateFin.Size = new System.Drawing.Size(233, 22);
             this.dtpDateFin.TabIndex = 13;
             // 
             // dtpDateDebut
             // 
-            this.dtpDateDebut.Location = new System.Drawing.Point(232, 33);
+            this.dtpDateDebut.Location = new System.Drawing.Point(203, 33);
             this.dtpDateDebut.Name = "dtpDateDebut";
-            this.dtpDateDebut.Size = new System.Drawing.Size(200, 22);
+            this.dtpDateDebut.Size = new System.Drawing.Size(233, 22);
             this.dtpDateDebut.TabIndex = 12;
             // 
             // btnEnregAbsence
@@ -357,7 +358,7 @@ namespace PersMediaTek86
             // lblMotif
             // 
             this.lblMotif.AutoSize = true;
-            this.lblMotif.Location = new System.Drawing.Point(126, 120);
+            this.lblMotif.Location = new System.Drawing.Point(97, 120);
             this.lblMotif.Name = "lblMotif";
             this.lblMotif.Size = new System.Drawing.Size(38, 17);
             this.lblMotif.TabIndex = 9;
@@ -366,7 +367,7 @@ namespace PersMediaTek86
             // lblDateFin
             // 
             this.lblDateFin.AutoSize = true;
-            this.lblDateFin.Location = new System.Drawing.Point(126, 79);
+            this.lblDateFin.Location = new System.Drawing.Point(97, 79);
             this.lblDateFin.Name = "lblDateFin";
             this.lblDateFin.Size = new System.Drawing.Size(77, 17);
             this.lblDateFin.TabIndex = 7;
@@ -375,7 +376,7 @@ namespace PersMediaTek86
             // lblDateDebut
             // 
             this.lblDateDebut.AutoSize = true;
-            this.lblDateDebut.Location = new System.Drawing.Point(126, 36);
+            this.lblDateDebut.Location = new System.Drawing.Point(97, 36);
             this.lblDateDebut.Name = "lblDateDebut";
             this.lblDateDebut.Size = new System.Drawing.Size(98, 17);
             this.lblDateDebut.TabIndex = 5;
@@ -384,9 +385,9 @@ namespace PersMediaTek86
             // cboMotif
             // 
             this.cboMotif.FormattingEnabled = true;
-            this.cboMotif.Location = new System.Drawing.Point(232, 117);
+            this.cboMotif.Location = new System.Drawing.Point(203, 117);
             this.cboMotif.Name = "cboMotif";
-            this.cboMotif.Size = new System.Drawing.Size(200, 24);
+            this.cboMotif.Size = new System.Drawing.Size(233, 24);
             this.cboMotif.TabIndex = 4;
             // 
             // FrmGestion

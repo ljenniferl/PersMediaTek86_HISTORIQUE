@@ -18,6 +18,8 @@ namespace PersMediaTek86.Dal
         /// </summary>
         private static string connectionString = "server=localhost;user id=userDB;password=userDB;database=PersMediaTek86;SslMode=none";
 
+        // PARTIE PERSONNEL
+
         /// <summary>
         /// Récupère et retourne les personnels provenant de la BDD
         /// </summary>
@@ -109,6 +111,49 @@ namespace PersMediaTek86.Dal
         }
 
 
+        // PARTIE ABSENCE
 
+        /// <summary>
+        /// Récupère et retourne les absences provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des absences</returns>
+        public static List<Absence> GetLesAbsences(int monId)
+        {
+            List<Absence> lesAbsences = new List<Absence>();
+            string req = "SELECT a.idpersonnel AS idpersonnel, a.datedebut AS dateDebut, a.idmotif AS idmotif, m.libelle AS libelle, a.datefin AS dateFin";
+            req += " FROM absence a JOIN personnel p ON(a.idpersonnel = p.idpersonnel) JOIN motif m ON(a.idmotif = m.idmotif)";
+            req += " WHERE a.idpersonnel = @idpersonnel";
+            req += " ORDER BY datedebut DESC;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", monId);
+            ConnexionBDD curs = ConnexionBDD.GetInstance(connectionString);
+            curs.ReqSelect(req, parameters);
+            while (curs.Read())
+            {
+                Absence absence = new Absence((int)curs.Field("idpersonnel"), (DateTime)curs.Field("dateDebut"), (int)curs.Field("idmotif"), (string)curs.Field("libelle"), (DateTime)curs.Field("dateFin"));
+                lesAbsences.Add(absence);
+            }
+            curs.Close();
+            return lesAbsences;
+        }
+
+        /// <summary>
+        /// Récupère et retourne les motifs d'absence provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des motifs d'absence</returns>
+        public static List<Motif> GetLesMotifs()
+        {
+            List<Motif> lesMotifs = new List<Motif>();
+            string req = "SELECT * FROM motif ORDER BY libelle;";
+            ConnexionBDD curs = ConnexionBDD.GetInstance(connectionString);
+            curs.ReqSelect(req, null);
+            while (curs.Read())
+            {
+                Motif motif = new Motif((int)curs.Field("idmotif"), (string)curs.Field("libelle"));
+                lesMotifs.Add(motif);
+            }
+            curs.Close();
+            return lesMotifs;
+        }
     }
 }

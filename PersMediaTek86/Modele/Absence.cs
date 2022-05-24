@@ -54,6 +54,5 @@ namespace PersMediaTek86.Modele
         ///  Récupération de la date de fin de l'absence
         /// </summary>
         public DateTime DateFin { get => dateFin; }
-
     }
 }

@@ -18,6 +18,8 @@ namespace PersMediaTek86.Modele
         private string mail;
         private int idservice;
         private string service;
+        
+
 
         /// <summary>
         /// Constructeur : valorise les propriétés
@@ -68,5 +70,8 @@ namespace PersMediaTek86.Modele
         /// Récupération du nom du service
         /// </summary>
         public string Service { get => service; }
+
+
+
     }
 }

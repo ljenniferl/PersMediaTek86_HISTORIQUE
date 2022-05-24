@@ -15,6 +15,9 @@ namespace PersMediaTek86.Vue
     /// </summary>
     public partial class FrmAuthentification : Form
     {
+        /// <summary>
+        /// FrmAuthentification
+        /// </summary>
         public FrmAuthentification()
         {
             InitializeComponent();
