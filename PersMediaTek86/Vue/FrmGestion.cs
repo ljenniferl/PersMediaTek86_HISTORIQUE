@@ -86,9 +86,41 @@ namespace PersMediaTek86
             }
         }
 
+        /// <summary>
+        ///  Demande d'ajout d'un personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAjoutPersonnel_Click(object sender, EventArgs e)
         {
             grbLePersonnel.Enabled = true;
+        }
+
+        /// <summary>
+        ///  Demande de modification d'un personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void btnModifPersonnel_Click(object sender, EventArgs e)
+        {
+            grbLePersonnel.Enabled = true;
+            if (dgvPersonnels.SelectedRows.Count > 0)
+            {
+                enCoursDeModif = true;
+                grbLesPersonnels.Enabled = false;
+                Personnel personnel = (Personnel)bdgPersonnels.List[bdgPersonnels.Position];
+                txtNom.Text = personnel.Nom;
+                txtPrenom.Text = personnel.Prenom;
+                txtTel.Text = personnel.Tel;
+                txtMail.Text = personnel.Mail;
+                cboService.SelectedIndex = cboService.FindStringExact(personnel.Service);
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+
         }
     }
 }

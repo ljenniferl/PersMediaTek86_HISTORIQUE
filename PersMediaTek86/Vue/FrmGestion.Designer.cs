@@ -101,6 +101,7 @@ namespace PersMediaTek86
             this.btnModifPersonnel.TabIndex = 3;
             this.btnModifPersonnel.Text = "Modifier";
             this.btnModifPersonnel.UseVisualStyleBackColor = true;
+            this.btnModifPersonnel.Click += new System.EventHandler(this.btnModifPersonnel_Click);
             // 
             // btnAjoutPersonnel
             // 

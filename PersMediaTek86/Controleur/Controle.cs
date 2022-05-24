@@ -49,6 +49,14 @@ namespace PersMediaTek86.Controleur
             AccesDonnees.AddPersonnel(personnel);
         }
 
+        /// <summary>
+        /// Demande de modification d'un personnel
+        /// </summary>
+        /// <param name="personnel"></param>
+        public void UpdatePersonnel(Personnel personnel)
+        {
+            AccesDonnees.UpdatePersonnel(personnel);
+        }
 
     }
 }
