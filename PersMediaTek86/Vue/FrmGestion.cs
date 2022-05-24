@@ -87,6 +87,28 @@ namespace PersMediaTek86
         }
 
         /// <summary>
+        /// Demande de suppression d'un personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupprPersonnel_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnels.SelectedRows.Count > 0)
+            {
+                Personnel personnel = (Personnel)bdgPersonnels.List[bdgPersonnels.Position];
+                if (MessageBox.Show("Voulez-vous vraiment supprimer " + personnel.Nom + " " + personnel.Prenom + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.DelPersonnel(personnel);
+                    RemplirListePersonnels();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+        }
+
+        /// <summary>
         ///  Demande d'ajout d'un personnel
         /// </summary>
         /// <param name="sender"></param>
@@ -104,11 +126,11 @@ namespace PersMediaTek86
 
         private void btnModifPersonnel_Click(object sender, EventArgs e)
         {
-            grbLePersonnel.Enabled = true;
             if (dgvPersonnels.SelectedRows.Count > 0)
             {
                 enCoursDeModif = true;
                 grbLesPersonnels.Enabled = false;
+                grbLePersonnel.Enabled = true;
                 Personnel personnel = (Personnel)bdgPersonnels.List[bdgPersonnels.Position];
                 txtNom.Text = personnel.Nom;
                 txtPrenom.Text = personnel.Prenom;
@@ -122,5 +144,6 @@ namespace PersMediaTek86
             }
 
         }
+
     }
 }

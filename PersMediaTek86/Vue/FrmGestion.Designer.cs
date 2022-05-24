@@ -92,6 +92,7 @@ namespace PersMediaTek86
             this.btnSupprPersonnel.TabIndex = 4;
             this.btnSupprPersonnel.Text = "Supprimer";
             this.btnSupprPersonnel.UseVisualStyleBackColor = true;
+            this.btnSupprPersonnel.Click += new System.EventHandler(this.btnSupprPersonnel_Click);
             // 
             // btnModifPersonnel
             // 
