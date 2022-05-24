@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connexion\ConnexionBDD.cs" />
+    <Compile Include="Dal\AccesDonnees.cs" />
     <Compile Include="Vue\FrmAuthentification.cs">
       <SubType>Form</SubType>
     </Compile>
