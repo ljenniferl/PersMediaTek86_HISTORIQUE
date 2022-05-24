@@ -41,11 +41,11 @@ namespace PersMediaTek86.Modele
         /// <summary>
         /// Récupération de la date de début de l'absence
         /// </summary>
-        public DateTime DateDebut { get => dateDebut; }
+        public DateTime DateDebut { get => dateDebut.Date; }
         /// <summary>
         ///  Récupération de la date de fin de l'absence
         /// </summary>
-        public DateTime DateFin { get => dateFin; }
+        public DateTime DateFin { get => dateFin.Date; }
         /// <summary>
         /// Récupération de l'id du motif d'absence
         /// </summary>

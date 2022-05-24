@@ -90,6 +90,7 @@ namespace PersMediaTek86.Vue
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.btnConnexion);
             this.Name = "FrmAuthentification";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Personnel MediaTek86";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -413,6 +413,7 @@ namespace PersMediaTek86
             this.Controls.Add(this.grbLesAbsences);
             this.Controls.Add(this.grbLesPersonnels);
             this.Name = "FrmGestion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Personnel MediaTek86";
             this.grbLesPersonnels.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnels)).EndInit();
