@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,8 @@ namespace PersMediaTek86.Dal
         /// Chaine de connexion à la BDD
         /// </summary>
         private static string connectionString = "server=localhost;user id=userDB;password=userDB;database=PersMediaTek86;SslMode=none";
+
+        // PARTIE PERSONNEL
 
         /// <summary>
         /// Contrôle si l'utilisateur a le droit de se connecter (login, pwd)

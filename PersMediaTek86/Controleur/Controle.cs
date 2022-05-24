@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using PersMediaTek86.Dal;
 using PersMediaTek86.Modele;
-using PersMediaTek86.Vue;
 
 namespace PersMediaTek86.Controleur
 {
@@ -29,6 +28,8 @@ namespace PersMediaTek86.Controleur
             frmAuthentification = new FrmAuthentification(this);
             frmAuthentification.ShowDialog();
         }
+
+        // PARTIE PERSONNEL
 
         /// <summary>
         /// Demande la vérification de l'authentification
@@ -145,7 +146,5 @@ namespace PersMediaTek86.Controleur
         {
             AccesDonnees.UpdateAbsence(absence);
         }
-
-
     }
 }

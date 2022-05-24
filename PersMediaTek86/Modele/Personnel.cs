@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,5 +68,8 @@ namespace PersMediaTek86.Modele
         /// Récupération du nom du service
         /// </summary>
         public string Service { get => service; }
+
+
+
     }
 }
