@@ -40,6 +40,15 @@ namespace PersMediaTek86.Controleur
             return AccesDonnees.GetLesServices();
         }
 
+        /// <summary>
+        /// Demande d'ajout d'un personnel
+        /// </summary>
+        /// <param name="personnel"></param>
+        public void AddPersonnel(Personnel personnel)
+        {
+            AccesDonnees.AddPersonnel(personnel);
+        }
+
 
     }
 }

@@ -110,6 +110,7 @@ namespace PersMediaTek86
             this.btnAjoutPersonnel.TabIndex = 2;
             this.btnAjoutPersonnel.Text = "Ajouter";
             this.btnAjoutPersonnel.UseVisualStyleBackColor = true;
+            this.btnAjoutPersonnel.Click += new System.EventHandler(this.btnAjoutPersonnel_Click);
             // 
             // btnAffichAbsences
             // 
