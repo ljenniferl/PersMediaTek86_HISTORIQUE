@@ -19,8 +19,6 @@ namespace PersMediaTek86.Modele
         private int idservice;
         private string service;
         
-
-
         /// <summary>
         /// Constructeur : valorise les propriétés
         /// </summary>

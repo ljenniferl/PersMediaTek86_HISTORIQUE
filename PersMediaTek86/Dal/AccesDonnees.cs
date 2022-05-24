@@ -21,6 +21,36 @@ namespace PersMediaTek86.Dal
         // PARTIE PERSONNEL
 
         /// <summary>
+        /// Contrôle si l'utilisateur a le droit de se connecter (login, pwd)
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public static Boolean ControleAuthentification(string login, string pwd)
+        {
+            string req = "SELECT * FROM responsable r";
+            req += " WHERE r.login = @login AND pwd = SHA2(@pwd, 256);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@login", login);
+            parameters.Add("@pwd", pwd);
+            ConnexionBDD curs = ConnexionBDD.GetInstance(connectionString);
+            curs.ReqSelect(req, parameters);
+            if (curs.Read())
+            {
+                curs.Close();
+                return true;
+            }
+            else
+            {
+                curs.Close();
+                return false;
+            }
+        }
+
+
+        // PARTIE PERSONNEL
+
+        /// <summary>
         /// Récupère et retourne les personnels provenant de la BDD
         /// </summary>
         /// <returns>Liste des personnels</returns>
@@ -130,7 +160,7 @@ namespace PersMediaTek86.Dal
             curs.ReqSelect(req, parameters);
             while (curs.Read())
             {
-                Absence absence = new Absence((int)curs.Field("idpersonnel"), (DateTime)curs.Field("dateDebut"), (int)curs.Field("idmotif"), (string)curs.Field("libelle"), (DateTime)curs.Field("dateFin"));
+                Absence absence = new Absence((int)curs.Field("idpersonnel"), (DateTime)curs.Field("dateDebut"), (DateTime)curs.Field("dateFin"), (int)curs.Field("idmotif"), (string)curs.Field("libelle"));
                 lesAbsences.Add(absence);
             }
             curs.Close();
@@ -154,6 +184,54 @@ namespace PersMediaTek86.Dal
             }
             curs.Close();
             return lesMotifs;
+        }
+
+        /// <summary>
+        /// Supprime une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à supprimer</param>
+        public static void DelAbsence(Absence absence)
+        {
+            string req = "DELETE FROM absence WHERE idpersonnel = @idpersonnel AND dateDebut = @dateDebut;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.Idpersonnel);
+            parameters.Add("@dateDebut", absence.DateDebut);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Ajoute une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à ajouter</param>
+        public static void AddAbsence(Absence absence)
+        {
+            string req = "INSERT INTO absence(idpersonnel, dateDebut, idmotif, dateFin)";
+            req += " VALUES(@idpersonnel, @dateDebut, @idmotif, @dateFin);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.Idpersonnel);
+            parameters.Add("@dateDebut", absence.DateDebut);
+            parameters.Add("@idmotif", absence.Idmotif);
+            parameters.Add("@dateFin", absence.DateFin);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Modifie une absence
+        /// </summary>
+        /// <param name="absence">Objet absence à modifier</param>
+        public static void UpdateAbsence(Absence absence)
+        {
+            string req = "UPDATE absence SET dateFin = @dateFin, idmotif = @idmotif";
+            req += " WHERE idpersonnel = @idpersonnel AND dateDebut = @dateDebut;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.Idpersonnel);
+            parameters.Add("@dateDebut", absence.DateDebut);
+            parameters.Add("@dateFin", absence.DateFin);
+            parameters.Add("@idmotif", absence.Idmotif);
+            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
+            conn.ReqUpdate(req, parameters);
         }
     }
 }

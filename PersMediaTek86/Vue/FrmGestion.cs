@@ -19,11 +19,15 @@ namespace PersMediaTek86
     public partial class FrmGestion : Form
     {
         /// <summary>
-        /// Paramètre monId récupérant l'idpersonnel du personnel sélectionné dans dgvPersonnels
+        /// Paramètre récupérant l'id du personnel sélectionné dans dgvPersonnels
         /// </summary>
         public static int monId;
         /// <summary>
-        /// Instance du controleur
+        /// Paramètre récupérant la date de début de l'absence sélectionnée dans dgvAbsences
+        /// </summary>
+        public static DateTime maDateDebut;
+        /// <summary>
+        /// Instance du contrôleur
         /// </summary>
         private Controle controle;
         /// <summary>
@@ -50,7 +54,7 @@ namespace PersMediaTek86
 
         /// <summary>
         /// Initialisation des composants graphiques
-        /// Récupération du controleur
+        /// Récupération du contrôleur
         /// </summary>
         /// <param name="controle"></param>
         public FrmGestion(Controle controle)
@@ -129,6 +133,10 @@ namespace PersMediaTek86
         /// <param name="e"></param>
         private void btnAjoutPersonnel_Click(object sender, EventArgs e)
         {
+            btnModifPersonnel.Enabled = false;
+            btnSupprPersonnel.Enabled = false;
+            btnAffichAbsences.Enabled = false;
+            grbLesPersonnels.Enabled = false;
             grbLePersonnel.Enabled = true;
             grbLesAbsences.Enabled = false;
             grbLAbsence.Enabled = false;
@@ -147,6 +155,8 @@ namespace PersMediaTek86
                 enCoursDeModif = true;
                 grbLesPersonnels.Enabled = false;
                 grbLePersonnel.Enabled = true;
+                grbLesAbsences.Enabled = false;
+                grbLAbsence.Enabled = false;
                 Personnel personnel = (Personnel)bdgPersonnels.List[bdgPersonnels.Position];
                 txtNom.Text = personnel.Nom;
                 txtPrenom.Text = personnel.Prenom;
@@ -173,6 +183,12 @@ namespace PersMediaTek86
                 grbLesPersonnels.Enabled = true;
                 enCoursDeModif = false;
                 grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = false;
+                grbLAbsence.Enabled = false;
+                btnAjoutPersonnel.Enabled = true;
+                btnModifPersonnel.Enabled = true;
+                btnSupprPersonnel.Enabled = true;
+                btnAffichAbsences.Enabled = true;
             }
         }
 
@@ -217,6 +233,10 @@ namespace PersMediaTek86
                 }
                 RemplirListePersonnels();
                 ViderPersonnel();
+                grbLesPersonnels.Enabled = true;
+                grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = false;
+                grbLAbsence.Enabled = false;
             }
             else
             {
@@ -227,7 +247,7 @@ namespace PersMediaTek86
         // PARTIE ABSENCE
 
         /// <summary>
-        /// Affiche la liste des absences du personnel séléectionné dans dgvLesPersonnels
+        /// Affiche la liste des absences du personnel sélectionné dans dgvPersonnels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -238,9 +258,12 @@ namespace PersMediaTek86
                 monId = (int)dgvPersonnels.CurrentRow.Cells["idpersonnel"].Value;
                 RemplirListeAbsences(monId);
                 RemplirListeMotifs();
+                btnAjoutPersonnel.Enabled = false;
+                btnModifPersonnel.Enabled = false;
+                btnSupprPersonnel.Enabled = false;
                 grbLePersonnel.Enabled = false;
                 grbLesAbsences.Enabled = true;
-                grbLAbsence.Enabled = true;
+                grbLAbsence.Enabled = false;
             }
             else
             {
@@ -275,7 +298,168 @@ namespace PersMediaTek86
             }
         }
 
+        /// <summary>
+        /// Demande d'ajout d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAjoutAbsence_Click(object sender, EventArgs e)
+        {
+            btnModifAbsence.Enabled = false;
+            btnSupprAbsence.Enabled = false;
+            grbLePersonnel.Enabled = false;
+            grbLesAbsences.Enabled = false;
+            grbLAbsence.Enabled = true;
+        }
+
+        /// <summary>
+        ///  Demande de modification d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void btnModifAbsence_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                enCoursDeModif = true;
+                grbLesPersonnels.Enabled = false;
+                grbLePersonnel.Enabled = false;
+                grbLAbsence.Enabled = true;
+                dtpDateDebut.Enabled = false;
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                dtpDateDebut.Value = absence.DateDebut;
+                dtpDateFin.Value = absence.DateFin;
+                cboMotif.SelectedIndex = cboMotif.FindStringExact(absence.Libelle);
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupprAbsence_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence débutant le " + absence.DateDebut + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.DelAbsence(absence);
+                    RemplirListeAbsences(monId);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+            grbLePersonnel.Enabled = false;
+            grbLAbsence.Enabled = false;
+        }
 
 
+        /// <summary>
+        /// Vide les zones de saisie d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAnnulAbsence_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous vraiment annuler ?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                ViderAbsence();
+                grbLesPersonnels.Enabled = true;
+                enCoursDeModif = false;
+                grbLePersonnel.Enabled = false;
+                grbLesAbsences.Enabled = true;
+                grbLAbsence.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Vider les zones de saisie d'une absence
+        /// </summary>
+        private void ViderAbsence()
+        {
+            dtpDateDebut.CustomFormat = "";
+            dtpDateFin.CustomFormat = "";
+            cboMotif.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Demande d'ajout ou de modification d'une absence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnregAbsence_Click(object sender, EventArgs e)
+        {
+            if (!dtpDateDebut.Value.Equals("") && !dtpDateFin.Value.Equals("") && cboMotif.SelectedIndex != -1)
+            {
+                Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
+                if (enCoursDeModif)
+                {
+                    monId = (int)dgvAbsences.CurrentRow.Cells["idpersonnel"].Value;
+                    maDateDebut = dtpDateDebut.Value;
+                }
+                Absence absence = new Absence(monId, dtpDateDebut.Value, dtpDateFin.Value, motif.Idmotif, motif.Libelle);
+                if (enCoursDeModif)
+                {
+                    if (dtpDateDebut.Value > dtpDateFin.Value)
+                    {
+                        MessageBox.Show("La date de début est postérieure à la date de fin. Veuillez rectifier.", "Alerte");
+                        dtpDateFin.Enabled = true;
+                        cboMotif.Enabled = true;
+                        return;
+                    }
+                    else
+                    {
+                        controle.UpdateAbsence(absence);
+                        enCoursDeModif = false;
+                        grbLesPersonnels.Enabled = true;
+                        grbLePersonnel.Enabled = false;
+                    }
+                }
+                else
+                {
+                    controle.AddAbsence(absence);
+                }
+                RemplirListeAbsences(monId);
+                ViderAbsence();
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+            }
+            grbLePersonnel.Enabled = false;
+            grbLesAbsences.Enabled = true;
+            grbLAbsence.Enabled = false;
+            btnAjoutAbsence.Enabled = true;
+            btnModifAbsence.Enabled = true;
+            btnSupprAbsence.Enabled = true;
+        }
+
+        /// <summary>
+        /// Lors de la séection d'un autre personnel dans dgvPersonnels :
+        /// - Vide la liste des absences
+        /// - Active les boutons de grbPersonnels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvPersonnels_SelectionChanged(object sender, EventArgs e)
+        {
+            dgvAbsences.Rows.Clear();
+            btnAjoutPersonnel.Enabled = true;
+            btnModifPersonnel.Enabled = true;
+            btnSupprPersonnel.Enabled = true;
+            btnAffichAbsences.Enabled = true;
+            grbLePersonnel.Enabled = false;
+            grbLesAbsences.Enabled = false;
+            grbLAbsence.Enabled = false;
+        }
     }
 }

@@ -42,8 +42,9 @@ namespace PersMediaTek86.Vue
             this.btnConnexion.Name = "btnConnexion";
             this.btnConnexion.Size = new System.Drawing.Size(180, 30);
             this.btnConnexion.TabIndex = 0;
-            this.btnConnexion.Text = "Se connecter";
+            this.btnConnexion.Text = "Connexion";
             this.btnConnexion.UseVisualStyleBackColor = true;
+            this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
             // txtLogin
             // 
@@ -56,6 +57,7 @@ namespace PersMediaTek86.Vue
             // 
             this.txtPwd.Location = new System.Drawing.Point(156, 86);
             this.txtPwd.Name = "txtPwd";
+            this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(180, 22);
             this.txtPwd.TabIndex = 2;
             // 
@@ -88,6 +90,7 @@ namespace PersMediaTek86.Vue
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.btnConnexion);
             this.Name = "FrmAuthentification";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Personnel MediaTek86";
             this.ResumeLayout(false);
             this.PerformLayout();

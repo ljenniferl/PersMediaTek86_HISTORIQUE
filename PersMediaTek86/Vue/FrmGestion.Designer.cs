@@ -126,13 +126,18 @@ namespace PersMediaTek86
             // 
             // dgvPersonnels
             // 
+            this.dgvPersonnels.AllowUserToAddRows = false;
+            this.dgvPersonnels.AllowUserToDeleteRows = false;
             this.dgvPersonnels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersonnels.Location = new System.Drawing.Point(14, 31);
             this.dgvPersonnels.Name = "dgvPersonnels";
+            this.dgvPersonnels.ReadOnly = true;
             this.dgvPersonnels.RowHeadersWidth = 51;
             this.dgvPersonnels.RowTemplate.Height = 24;
+            this.dgvPersonnels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonnels.Size = new System.Drawing.Size(500, 166);
             this.dgvPersonnels.TabIndex = 0;
+            this.dgvPersonnels.SelectionChanged += new System.EventHandler(this.dgvPersonnels_SelectionChanged);
             // 
             // grbLesAbsences
             // 
@@ -155,6 +160,7 @@ namespace PersMediaTek86
             this.btnSupprAbsence.TabIndex = 4;
             this.btnSupprAbsence.Text = "Supprimer";
             this.btnSupprAbsence.UseVisualStyleBackColor = true;
+            this.btnSupprAbsence.Click += new System.EventHandler(this.btnSupprAbsence_Click);
             // 
             // btnModifAbsence
             // 
@@ -164,6 +170,7 @@ namespace PersMediaTek86
             this.btnModifAbsence.TabIndex = 3;
             this.btnModifAbsence.Text = "Modifier";
             this.btnModifAbsence.UseVisualStyleBackColor = true;
+            this.btnModifAbsence.Click += new System.EventHandler(this.btnModifAbsence_Click);
             // 
             // btnAjoutAbsence
             // 
@@ -173,12 +180,16 @@ namespace PersMediaTek86
             this.btnAjoutAbsence.TabIndex = 2;
             this.btnAjoutAbsence.Text = "Ajouter";
             this.btnAjoutAbsence.UseVisualStyleBackColor = true;
+            this.btnAjoutAbsence.Click += new System.EventHandler(this.btnAjoutAbsence_Click);
             // 
             // dgvAbsences
             // 
+            this.dgvAbsences.AllowUserToAddRows = false;
+            this.dgvAbsences.AllowUserToDeleteRows = false;
             this.dgvAbsences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAbsences.Location = new System.Drawing.Point(14, 31);
             this.dgvAbsences.Name = "dgvAbsences";
+            this.dgvAbsences.ReadOnly = true;
             this.dgvAbsences.RowHeadersWidth = 51;
             this.dgvAbsences.RowTemplate.Height = 24;
             this.dgvAbsences.Size = new System.Drawing.Size(500, 166);
@@ -345,6 +356,7 @@ namespace PersMediaTek86
             this.btnEnregAbsence.TabIndex = 11;
             this.btnEnregAbsence.Text = "Enregistrer";
             this.btnEnregAbsence.UseVisualStyleBackColor = true;
+            this.btnEnregAbsence.Click += new System.EventHandler(this.btnEnregAbsence_Click);
             // 
             // btnAnnulAbsence
             // 
@@ -354,6 +366,7 @@ namespace PersMediaTek86
             this.btnAnnulAbsence.TabIndex = 10;
             this.btnAnnulAbsence.Text = "Annuler";
             this.btnAnnulAbsence.UseVisualStyleBackColor = true;
+            this.btnAnnulAbsence.Click += new System.EventHandler(this.btnAnnulAbsence_Click);
             // 
             // lblMotif
             // 
@@ -400,6 +413,7 @@ namespace PersMediaTek86
             this.Controls.Add(this.grbLesAbsences);
             this.Controls.Add(this.grbLesPersonnels);
             this.Name = "FrmGestion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Personnel MediaTek86";
             this.grbLesPersonnels.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnels)).EndInit();

@@ -33,6 +33,5 @@ namespace PersMediaTek86.Modele
         /// Récupération du pwd du responsable
         /// </summary>
         public string Pwd { get => pwd; }
-
     }
 }
