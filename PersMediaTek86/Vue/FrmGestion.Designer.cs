@@ -212,6 +212,7 @@ namespace PersMediaTek86
             this.btnEnregPersonnel.TabIndex = 11;
             this.btnEnregPersonnel.Text = "Enregistrer";
             this.btnEnregPersonnel.UseVisualStyleBackColor = true;
+            this.btnEnregPersonnel.Click += new System.EventHandler(this.btnEnregPersonnel_Click);
             // 
             // btnAnnulPersonnel
             // 
@@ -221,6 +222,7 @@ namespace PersMediaTek86
             this.btnAnnulPersonnel.TabIndex = 10;
             this.btnAnnulPersonnel.Text = "Annuler";
             this.btnAnnulPersonnel.UseVisualStyleBackColor = true;
+            this.btnAnnulPersonnel.Click += new System.EventHandler(this.btnAnnulPersonnel_Click);
             // 
             // lblService
             // 

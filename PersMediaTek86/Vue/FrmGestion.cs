@@ -145,5 +145,68 @@ namespace PersMediaTek86
 
         }
 
+        /// <summary>
+        /// Vide les zones de saisie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAnnulPersonnel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous vraiment annuler ?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                ViderPersonnel();
+                grbLesPersonnels.Enabled = true;
+                enCoursDeModif = false;
+                grbLePersonnel.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Vider les zones de saisie d'un personnel
+        /// </summary>
+        private void ViderPersonnel()
+        {
+            txtNom.Text = "";
+            txtPrenom.Text = "";
+            txtTel.Text = "";
+            txtMail.Text = "";
+            cboService.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Demande d'ajout ou de modification d'un personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnregPersonnel_Click(object sender, EventArgs e)
+        {
+            if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !txtTel.Text.Equals("") && !txtMail.Text.Equals("") && cboService.SelectedIndex != -1)
+            {
+                Service service = (Service)bdgServices.List[bdgServices.Position];
+                int idpersonnel = 0;
+                if (enCoursDeModif)
+                {
+                    idpersonnel = (int)dgvPersonnels.SelectedRows[0].Cells["idpersonnel"].Value;
+                }
+                Personnel personnel = new Personnel(idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
+                if (enCoursDeModif)
+                {
+                    controle.UpdatePersonnel(personnel);
+                    enCoursDeModif = false;
+                    grbLesPersonnels.Enabled = true;
+                    grbLePersonnel.Enabled = false;
+                }
+                else
+                {
+                    controle.AddPersonnel(personnel);
+                }
+                RemplirListePersonnels();
+                ViderPersonnel();
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+            }
+        }
     }
 }
