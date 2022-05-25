@@ -258,9 +258,9 @@ namespace PersMediaTek86
                 monId = (int)dgvPersonnels.CurrentRow.Cells["idpersonnel"].Value;
                 RemplirListeAbsences(monId);
                 RemplirListeMotifs();
-                btnAjoutPersonnel.Enabled = false;
-                btnModifPersonnel.Enabled = false;
-                btnSupprPersonnel.Enabled = false;
+                // ?? btnAjoutPersonnel.Enabled = false;
+                // ?? btnModifPersonnel.Enabled = false;
+                // ?? btnSupprPersonnel.Enabled = false;
                 grbLePersonnel.Enabled = false;
                 grbLesAbsences.Enabled = true;
                 grbLAbsence.Enabled = false;
@@ -305,10 +305,7 @@ namespace PersMediaTek86
         /// <param name="e"></param>
         private void btnAjoutAbsence_Click(object sender, EventArgs e)
         {
-            btnModifAbsence.Enabled = false;
-            btnSupprAbsence.Enabled = false;
             grbLePersonnel.Enabled = false;
-            grbLesAbsences.Enabled = false;
             grbLAbsence.Enabled = true;
         }
 
@@ -323,7 +320,6 @@ namespace PersMediaTek86
             if (dgvAbsences.SelectedRows.Count > 0)
             {
                 enCoursDeModif = true;
-                grbLesPersonnels.Enabled = false;
                 grbLePersonnel.Enabled = false;
                 grbLAbsence.Enabled = true;
                 dtpDateDebut.Enabled = false;
@@ -420,8 +416,6 @@ namespace PersMediaTek86
                     {
                         controle.UpdateAbsence(absence);
                         enCoursDeModif = false;
-                        grbLesPersonnels.Enabled = true;
-                        grbLePersonnel.Enabled = false;
                     }
                 }
                 else
@@ -435,12 +429,10 @@ namespace PersMediaTek86
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
             }
+            grbLesPersonnels.Enabled = true;
             grbLePersonnel.Enabled = false;
             grbLesAbsences.Enabled = true;
             grbLAbsence.Enabled = false;
-            btnAjoutAbsence.Enabled = true;
-            btnModifAbsence.Enabled = true;
-            btnSupprAbsence.Enabled = true;
         }
 
         /// <summary>
